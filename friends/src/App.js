@@ -6,22 +6,39 @@ import { Route } from 'react-router-dom';
 import './App.css';
 
 class App extends Component {
+
+	componentDidMount() {
+		this.props.getFriends();
+	}
+
 	render() {
 		return (
 			<>
 				<Route
 					exact
 					path="/"
-					render={props => <FriendsListView {...props} />}
+					render={properties => <FriendsListView {...properties} friends={this.props.friends} error={this.props.error} isLoading={this.props.isLoading} />}
 				/>
 				<Route
 					exact
 					path="/friend/:id"
-					render={props => <Friend {...props} />}
+					render={properties => <Friend {...properties} friends={this.props.friends} />}
 				/>
 			</>
 		);
 	}
 }
 
-export default App;
+const mapStateToProps = state => ({
+	friends: state.friends,
+	error: state.error,
+	isLoading: state.isLoading,
+});
+
+export default connect(
+	mapStateToProps,
+	{ getFriends }
+)(App);
+
+
+// export default App;
