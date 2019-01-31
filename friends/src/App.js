@@ -4,6 +4,7 @@ import Friend from './components/Friend';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getFriends } from './actions';
+import Form from './components/Form';
 
 import './App.css';
 
@@ -17,6 +18,7 @@ class App extends Component {
 	render() {
 		return (
 			<>
+				<Form />
 				<Route
 					exact
 					path="/"

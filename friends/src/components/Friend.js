@@ -13,10 +13,11 @@ function Friend(props) {
 			</div>
 		);
 	return (
-		<>
+		<div className="Friend">
 			<p>{`test ${currentFriend.name}`}</p>
-			<p>{currentFriend.age}</p>
-		</>
+			<p>Age: {currentFriend.age}</p>
+			<p>Email: {currentFriend.email}</p>
+		</div>
 	);
 }
 

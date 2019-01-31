@@ -1,21 +1,19 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { getFriends } from '../actions';
+// import { connect } from 'react-redux';
+// import { getFriends } from '../actions';
 // import Friend from '../components/Friend';
 import { Link } from 'react-router-dom';
 
 export class FriendsListView extends Component {
 	constructor(props) {
 		super(props);
-		console.log(this.props.friends)
-
+		console.log(this.props.friends);
 	}
 	// componentDidMount() {
 	// 	this.props.getFriends();
 	// }
 	render(props) {
 		return (
-
 			<React.Fragment>
 				{this.props.isLoading ? <p>loading ...</p> : null}
 				{this.props.error ? <p>Connection error, try again.</p> : null}
@@ -23,8 +21,9 @@ export class FriendsListView extends Component {
 				{this.props.friends && (
 					<div className="friends">
 						{this.props.friends.map(singleFriend => (
-
-							<Link to={`/friend/${singleFriend.id}`} >
+							<Link
+								key={singleFriend.id}
+								to={`/friend/${singleFriend.id}`}>
 								{singleFriend.name}
 							</Link>
 						))}
@@ -61,4 +60,4 @@ export class FriendsListView extends Component {
 // 	{ getFriends }
 // )(FriendsListView);
 
-export default FriendsListView
+export default FriendsListView;
