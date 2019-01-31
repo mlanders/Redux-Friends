@@ -3,7 +3,7 @@ import React from 'react';
 
 function Friend(props) {
 	let currentFriend = props.friends.find(
-		friend => friend.id.toString() === prop.match.params.id
+		friend => friend.id.toString() === props.match.params.id
 	);
 
 	if (!currentFriend)

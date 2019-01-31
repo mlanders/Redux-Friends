@@ -2,16 +2,17 @@ import React, { Component } from 'react';
 import FriendsListView from './views/FriendsListView';
 import Friend from './components/Friend';
 import { Route } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { getFriends } from './actions';
 
 import './App.css';
 
 class App extends Component {
-
 	componentDidMount() {
-		console.log(this.props.friends)
+		console.log(this.props.friends);
 
 		this.props.getFriends();
-	};
+	}
 
 	render() {
 		return (
@@ -19,12 +20,21 @@ class App extends Component {
 				<Route
 					exact
 					path="/"
-					render={properties => <FriendsListView {...properties} friends={this.props.friends} error={this.props.error} isLoading={this.props.isLoading} />}
+					render={properties => (
+						<FriendsListView
+							{...properties}
+							friends={this.props.friends}
+							error={this.props.error}
+							isLoading={this.props.isLoading}
+						/>
+					)}
 				/>
 				<Route
 					exact
 					path="/friend/:id"
-					render={properties => <Friend {...properties} friends={this.props.friends} />}
+					render={properties => (
+						<Friend {...properties} friends={this.props.friends} />
+					)}
 				/>
 			</>
 		);
@@ -41,6 +51,5 @@ export default connect(
 	mapStateToProps,
 	{ getFriends }
 )(App);
-
 
 // export default App;
