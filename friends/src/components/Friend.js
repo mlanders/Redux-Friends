@@ -12,7 +12,12 @@ function Friend(props) {
 				<h2>Cannot find that friend!</h2>
 			</div>
 		);
-	return <p>{`test ${currentFriend.name}`}</p>;
+	return (
+		<>
+			<p>{`test ${currentFriend.name}`}</p>
+			<p>{currentFriend.age}</p>
+		</>
+	);
 }
 
 export default Friend;

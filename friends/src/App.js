@@ -8,8 +8,10 @@ import './App.css';
 class App extends Component {
 
 	componentDidMount() {
+		console.log(this.props.friends)
+
 		this.props.getFriends();
-	}
+	};
 
 	render() {
 		return (

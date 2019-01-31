@@ -7,11 +7,12 @@ import { Link } from 'react-router-dom';
 export class FriendsListView extends Component {
 	constructor(props) {
 		super(props);
+		console.log(this.props.friends)
+
 	}
 	// componentDidMount() {
 	// 	this.props.getFriends();
 	// }
-
 	render(props) {
 		return (
 
@@ -22,7 +23,8 @@ export class FriendsListView extends Component {
 				{this.props.friends && (
 					<div className="friends">
 						{this.props.friends.map(singleFriend => (
-							<Link key={singleFriend.id} to={`/friend/${singleFriend.id}`} >
+
+							<Link to={`/friend/${singleFriend.id}`} >
 								{singleFriend.name}
 							</Link>
 						))}
