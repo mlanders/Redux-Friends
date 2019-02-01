@@ -1,18 +1,13 @@
 import React, { Component } from 'react';
-// import { connect } from 'react-redux';
-// import { getFriends } from '../actions';
-// import Friend from '../components/Friend';
-import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { getFriends } from '../actions';
+import Friend from '../components/Friend';
 
 export class FriendsListView extends Component {
-	constructor(props) {
-		super(props);
-		console.log(this.props.friends);
+	componentDidMount() {
+		this.props.getFriends();
 	}
-	// componentDidMount() {
-	// 	this.props.getFriends();
-	// }
-	render(props) {
+	render() {
 		return (
 			<React.Fragment>
 				{this.props.isLoading ? <p>loading ...</p> : null}
@@ -20,44 +15,23 @@ export class FriendsListView extends Component {
 
 				{this.props.friends && (
 					<div className="friends">
-						{this.props.friends.map(singleFriend => (
-							<Link
-								key={singleFriend.id}
-								to={`/friend/${singleFriend.id}`}>
-								{singleFriend.name}
-							</Link>
+						{this.props.friends.map(friend => (
+							<Friend key={friend.id} friend={friend} />
 						))}
 					</div>
 				)}
 			</React.Fragment>
-
-			// <React.Fragment>
-			// 	{this.props.isLoading ? <p>loading ...</p> : null}
-			// 	{this.props.error ? <p>Connection error, try again.</p> : null}
-
-			// 	{this.props.friends && (
-			// 		<div className="friends">
-			// 			{this.props.friends.map(singleFriend => (
-			// 				<Link to={`/friend/${singleFriend.id}`}>
-			// 					{singleFriend.name}
-			// 				</Link>
-			// 			))}
-			// 		</div>
-			// 	)}
-			// </React.Fragment>
 		);
 	}
 }
 
-// const mapStateToProps = state => ({
-// 	friends: state.friends,
-// 	error: state.error,
-// 	isLoading: state.isLoading,
-// });
+const mapStateToProps = state => ({
+	friends: state.friends,
+	error: state.error,
+	isLoading: state.isLoading,
+});
 
-// export default connect(
-// 	mapStateToProps,
-// 	{ getFriends }
-// )(FriendsListView);
-
-export default FriendsListView;
+export default connect(
+	mapStateToProps,
+	{ getFriends }
+)(FriendsListView);

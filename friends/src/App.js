@@ -1,44 +1,59 @@
 import React, { Component } from 'react';
-import FriendsListView from './views/FriendsListView';
-import Friend from './components/Friend';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getFriends } from './actions';
+import { getFriends, addFriend } from './actions';
+import FriendsListView from './views/FriendsListView';
+import FriendInfo from './components/FriendInfo';
 import Form from './components/Form';
+import Nav from './components/Nav';
 
 import './App.css';
 
 class App extends Component {
-	componentDidMount() {
-		console.log(this.props.friends);
+	constructor() {
+		super();
+		this.state = {
+			name: '',
+			age: '',
+			email: '',
+		};
+	}
 
+	componentDidMount() {
 		this.props.getFriends();
 	}
 
+	handleChange = e => {
+		e.preventDefault();
+		this.setState({
+			[e.target.name]: e.target.value,
+		});
+	};
+
+	handleAddFriend = e => {
+		e.preventDefault();
+		let newFriend = {
+			name: this.state.name,
+			age: this.state.age,
+			email: this.state.email,
+		};
+		this.props.addFriend(newFriend);
+	};
+
 	render() {
 		return (
-			<>
-				<Form />
-				<Route
-					exact
-					path="/"
-					render={properties => (
-						<FriendsListView
-							{...properties}
-							friends={this.props.friends}
-							error={this.props.error}
-							isLoading={this.props.isLoading}
-						/>
-					)}
+			<div>
+				<Nav />
+				<Form
+					name={this.state.name}
+					age={this.state.age}
+					email={this.state.email}
+					handleChange={this.handleChange}
+					handleAddFriend={this.handleAddFriend}
 				/>
-				<Route
-					exact
-					path="/friend/:id"
-					render={properties => (
-						<Friend {...properties} friends={this.props.friends} />
-					)}
-				/>
-			</>
+				<Route exact path="/" component={FriendsListView} />
+				<Route path="/friend/:id" component={FriendInfo} />
+			</div>
 		);
 	}
 }
@@ -51,7 +66,7 @@ const mapStateToProps = state => ({
 
 export default connect(
 	mapStateToProps,
-	{ getFriends }
+	{ getFriends, addFriend }
 )(App);
 
 // export default App;

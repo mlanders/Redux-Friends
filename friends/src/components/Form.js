@@ -1,13 +1,30 @@
 import React from 'react';
 
-function Form() {
+function Form(props) {
 	return (
-		<>
-			<Form>
-				<input name="input" placeholder="Name" />
-			</Form>
-			<button>Submit</button>
-		</>
+		<div>
+			<form onSubmit={(e) => props.handleAddFriend(e)}>
+				<input
+					onChange={e => props.handleChange(e)}
+					name="name"
+					value={props.name}
+					placeholder="Name"
+				/>
+				<input
+					onChange={e => props.handleChange(e)}
+					name="age"
+					value={props.age}
+					placeholder="Age"
+				/>
+				<input
+					onChange={e => props.handleChange(e)}
+					name="email"
+					value={props.email}
+					placeholder="Email"
+				/>
+				<button>Submit</button>
+			</form>
+		</div>
 	);
 }
 
