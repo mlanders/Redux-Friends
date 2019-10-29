@@ -1,0 +1,9 @@
+.App {
+	text-align: center;
+}
+
+.friends {
+	display: flex;
+	flex-direction: column;
+}
+
